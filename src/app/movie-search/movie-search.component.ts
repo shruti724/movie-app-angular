@@ -31,4 +31,15 @@ export class MovieSearchComponent {
     bookmarked.push(movie);
     localStorage.setItem('bookmarkedMovies', JSON.stringify(bookmarked));
   }
+   
+  onUnbookmark(movie: any): void {
+    const bookmarked = JSON.parse(localStorage.getItem('bookmarkedMovies') || '[]');
+    const updated = bookmarked.filter((m: any) => m.imdbID !== movie.imdbID);
+    localStorage.setItem('bookmarkedMovies', JSON.stringify(updated));
+  }
+
+  isBookmarked(movie: any): boolean {
+    const bookmarked = JSON.parse(localStorage.getItem('bookmarkedMovies') || '[]');
+    return bookmarked.some((m: any) => m.imdbID === movie.imdbID);
+  }
 }

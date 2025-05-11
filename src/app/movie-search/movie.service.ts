@@ -14,11 +14,12 @@ export class MovieService {
 
   searchMovies(searchTerm: string): Observable<any> {
     const params = new HttpParams()
-      .set('s', searchTerm)  // The search query
-      .set('apikey', this.apiKey); // Your API key
+      .set('s', searchTerm)  
+      .set('apikey', this.apiKey); 
   
     console.log('API URL:', this.apiUrl);
   
     return this.http.get(this.apiUrl, { params });
   }
+
 }

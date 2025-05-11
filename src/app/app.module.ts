@@ -25,7 +25,7 @@ import { MovieService } from '../app/movie-search/movie.service';
     NbLayoutModule,
     NbIconModule,
     NbButtonModule,
-    NbCardModule,  // Import NbCardModule for nb-card
+    NbCardModule,  
     NbInputModule,
     HttpClientModule,
      NbActionsModule, 
