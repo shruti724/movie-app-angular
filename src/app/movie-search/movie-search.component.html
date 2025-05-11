@@ -1,0 +1,64 @@
+<nb-card style="width: 100%;">
+  <nb-card-header style="margin-top: 4.2rem; width: 100%; display: flex; flex-direction: column; align-items: center; padding: 20px;">
+  <!-- Search Input -->
+  <input nbInput 
+    fullWidth 
+    placeholder="Search movies..." 
+    [(ngModel)]="searchTerm" 
+    (keyup.enter)="onSearch()" 
+    style="width: 80%; max-width: 500px; margin-bottom: 15px; padding: 10px; font-size: 16px; border-radius: 8px; border: 1px solid #ccc; box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); transition: border-color 0.3s ease;">
+  
+  <!-- Search Button -->
+  <button nbButton 
+    status="primary" 
+    (click)="onSearch()" 
+    style="background-color: rgba(253, 0, 0, 0.874); color: white; padding: 12px 20px; font-size: 16px; border: none; border-radius: 8px; cursor: pointer; width: 80%; max-width: 500px; transition: background-color 0.3s ease;">
+    Search
+  </button>
+</nb-card-header>
+
+
+  <nb-card-body *ngIf="movies.length === 0" style="display: flex; justify-content: center; align-items: center; height: 60vh; background-color: #f4f7fb;">
+  <nb-card status="info" style="border-radius: 12px; overflow: hidden; width: 90%; max-width: 600px; box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);">
+    <nb-card-header style="background-color: #0056b3; color: white; text-align: center; padding: 20px; font-size: 1.2rem; font-weight: bold;">
+      ✨ Share Your Favorite Movie
+    </nb-card-header>
+    <nb-card-body style="padding: 30px; text-align: center; font-size: 1.1rem; color: #333; line-height: 1.6;">
+      Start by searching for a movie you love. Let's find something epic!
+    </nb-card-body>
+  </nb-card>
+</nb-card-body>
+
+
+  <nb-card-body *ngIf="movies.length > 0" style="width: 100%; display: flex; flex-wrap: wrap; justify-content: space-between; gap: 20px;">
+  <div *ngFor="let movie of movies" class="movie-item" style="flex-basis: calc(33.333% - 20px);">
+    <nb-card 
+      style="margin-top: 0.2rem; border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; cursor: pointer;"
+      (mouseenter)="hover = true" (mouseleave)="hover = false">
+      
+      <nb-card-header 
+        style="background-color: #f8f9fa; padding: 15px; font-size: 1.2rem; font-weight: bold; text-align: center;">
+        {{ movie.Title }}
+      </nb-card-header>
+      
+      <nb-card-body style="padding: 20px; text-align: center; background-color: #fff;">
+        <img 
+          [src]="movie.Poster" 
+          alt="{{ movie.Title }}" 
+          style="width: 100%; max-width: 150px; height: auto; border-radius: 8px; object-fit: cover; margin-bottom: 10px;" />
+        
+        <p style="font-size: 14px; color: #666; margin-bottom: 10px;">{{ movie.Year }}</p>
+        
+        <button 
+          nbButton 
+          status="success" 
+          style="padding: 10px 20px; font-size: 14px; border-radius: 25px; transition: background-color 0.3s ease;"
+          (click)="onBookmark(movie)">
+          Bookmark
+        </button>
+      </nb-card-body>
+      
+    </nb-card>
+  </div>
+</nb-card-body>
+

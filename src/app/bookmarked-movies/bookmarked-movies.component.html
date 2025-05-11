@@ -1,0 +1,36 @@
+<nb-card style="margin-top: 30px; border-radius: 8px; box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);">
+  <nb-card-header 
+    style="margin-top: 50px;  background-color: #f8f9fa; font-size: 1.2rem; font-weight: bold; padding: 15px; text-align: center;">
+    📌 Your Bookmarked Movies ({{ bookmarkedMovies.length }})
+  </nb-card-header>
+
+  <!-- Empty state -->
+  <nb-card-body *ngIf="bookmarkedMovies.length === 0" style="text-align: center; padding: 20px;">
+    <p style="font-size: 1rem; color: #666;">No movies bookmarked yet.</p>
+  </nb-card-body>
+
+  <!-- Movies list -->
+  <nb-card-body *ngIf="bookmarkedMovies.length > 0" style="padding: 20px; display: flex; flex-wrap: wrap; gap: 20px;">
+    <div *ngFor="let movie of bookmarkedMovies" style="flex-basis: calc(33.333% - 20px); margin-bottom: 20px;">
+      <nb-card style="box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease;">
+        <nb-card-header 
+          style="font-size: 1rem; padding: 10px; text-align: center; background-color: #f8f9fa;">
+          {{ movie.Title }}
+        </nb-card-header>
+        <nb-card-body 
+          style="text-align: center; padding: 20px; background-color: #fff;">
+          <img 
+            [src]="movie.Poster" 
+            alt="{{ movie.Title }}" 
+            style="width: 100px; height: 150px; object-fit: cover; margin-bottom: 10px; border-radius: 8px;" />
+          <p style="font-size: 14px; color: #666;">{{ movie.Year }}</p>
+
+          <!-- Unbookmark button -->
+          <button nbButton status="danger" (click)="onUnbookmark(movie)">
+            Unbookmark
+          </button>
+        </nb-card-body>
+      </nb-card>
+    </div>
+  </nb-card-body>
+</nb-card>
